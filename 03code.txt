@@ -1,0 +1,85 @@
+import lexnlp.nlp.en.tokens
+ import lexnlp.extract.en.citations
+ import lexnlp.extract.en.amounts
+ import lexnlp.extract.en.citations
+ import lexnlp.extract.en.conditions
+ import lexnlp.extract.en.constraints
+ import lexnlp.extract.en.cusip
+ import lexnlp.extract.en.dates
+ import lexnlp.extract.en.definitions
+ import lexnlp.extract.en.distances
+ import lexnlp.extract.en.durations
+ import lexnlp.extract.en.money
+ import lexnlp.extract.en.percents
+ import lexnlp.extract.en.pii
+ import lexnlp.extract.en.ratios
+ import lexnlp.extract.en.regulations
+ import lexnlp.extract.en.trademarks
+ import lexnlp.extract.en.urls
+ import json
+ import sys
+ from django.core.serializers.json import DjangoJSONEncoder
+ from pathlib import Path
+ 
+ # print("\nfile path:", sys.argv[1])
+ file_path = sys.argv[1]
+ file_content = Path(file_path).read_text()
+ # print(file_content)
+ 
+ output = {
+     "nouns": list(lexnlp.nlp.en.tokens.get_nouns(file_content)),
+     "citations": list(lexnlp.extract.en.citations.get_citations(file_content)),
+     "constraints": list(lexnlp.extract.en.constraints.get_constraints(file_content)),
+     "conditions": list(lexnlp.extract.en.conditions.get_conditions(file_content)),
+     "cusip": list(lexnlp.extract.en.cusip.get_cusip(file_content)),
+     "dates": list(lexnlp.extract.en.dates.get_dates(file_content)),
+     "definitions": list(lexnlp.extract.en.definitions.get_definitions(file_content)),
+     "distances": list(lexnlp.extract.en.distances.get_distances(file_content)),
+     "durations": list(lexnlp.extract.en.durations.get_durations(file_content)),
+     "money": list(lexnlp.extract.en.money.get_money(file_content)),
+     "percents": list(lexnlp.extract.en.percents.get_percents(file_content)),
+     "pii": list(lexnlp.extract.en.pii.get_pii(file_content)),
+     "ratios": list(lexnlp.extract.en.ratios.get_ratios(file_content)),
+     "regulations": list(lexnlp.extract.en.regulations.get_regulations(file_content)),
+     "trademarks": list(lexnlp.extract.en.trademarks.get_trademarks(file_content)),
+     "urls": list(lexnlp.extract.en.urls.get_urls(file_content)),
+ }
+ 
+ 
+ app_json = json.dumps(output, cls=DjangoJSONEncoder)
+ print(app_json)
+ 
+ # print("\get_nouns")
+ # print(list(lexnlp.nlp.en.tokens.get_nouns(file_content)))
+ # print("\get_amounts")
+ # print(list(lexnlp.extract.en.amounts.get_amounts(file_content)))
+ # print("\get_citations")
+ # print(list(lexnlp.extract.en.citations.get_citations(file_content)))
+ # print("\get_constraints")
+ # print(list(lexnlp.extract.en.constraints.get_constraints(file_content)))
+ # print("\get_conditions")
+ # print(list(lexnlp.extract.en.conditions.get_conditions(file_content)))
+ # print("\get_cusip")
+ # print(lexnlp.extract.en.cusip.get_cusip(file_content))
+ # print("\get_dates")
+ # print(list(lexnlp.extract.en.dates.get_dates(file_content)))
+ # print("\get_definitions")
+ # print(list(lexnlp.extract.en.definitions.get_definitions(file_content)))
+ # print("\get_distances")
+ # print(list(lexnlp.extract.en.distances.get_distances(file_content)))
+ # print("\get_durations")
+ # print(list(lexnlp.extract.en.durations.get_durations(file_content)))
+ # print("\get_money")
+ # print(list(lexnlp.extract.en.money.get_money(file_content)))
+ # print("\get_percents")
+ # print(list(lexnlp.extract.en.percents.get_percents(file_content)))
+ # print("\get_pii")
+ # print(list(lexnlp.extract.en.pii.get_pii(file_content)))
+ # print("\get_ratios")
+ # print(list(lexnlp.extract.en.ratios.get_ratios(file_content)))
+ # print("\get_regulations")
+ # print(list(lexnlp.extract.en.regulations.get_regulations(file_content)))
+ # print("\get_trademarks")
+ # print(list(lexnlp.extract.en.trademarks.get_trademarks(file_content)))
+ # print("\get_urls")
+ # print(list(lexnlp.extract.en.urls.get_urls(file_content)))
